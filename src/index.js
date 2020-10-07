@@ -1,30 +1,26 @@
 module.exports = function check(str, bracketsConfig) {
   const arr = [];
-  const openBrakets = [];
-  const closeBrakets = [];
+  const openBrackets = [];
+  const closeBrackets = [];
 
   bracketsConfig.forEach((item) => {
-    openBrakets.push(item[0]);
-    closeBrakets.push(item[1]);
-    //console.log(openBrakets, closeBrakets);
+    openBrackets.push(item[0]);
+    closeBrackets.push(item[1]);
   });
 
   for (let i = 0; i < str.length; i++) {
-    //console.log(i, str[i], arr);
-    //console.log(str[i], arr);
-    if (closeBrakets.includes(str[i]) && arr.length !== 0) {
-      const correspondBraket = openBrakets[closeBrakets.indexOf(str[i])];
-      //console.log(str[i], correspondBraket);
-      if (arr[arr.length - 1] === correspondBraket || arr[arr.length - 1] === str[i]) {
+    if (closeBrackets.includes(str[i]) && arr.length !== 0) {
+      const correspondBracket = openBrackets[closeBrackets.indexOf(str[i])];
+      if (arr[arr.length - 1] === correspondBracket || arr[arr.length - 1] === str[i]) {
         arr.pop();
-      } else if (str[i] !== correspondBraket) {
+      } else if (str[i] !== correspondBracket) {
         return false;
+      } else {
+        arr.push(str[i]);
       }
     } else {
       arr.push(str[i]);
     }
   }
-  //console.log(arr);
   return arr.length === 0;
-}
-
+};
